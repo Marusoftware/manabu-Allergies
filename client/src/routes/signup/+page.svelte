@@ -5,6 +5,7 @@
 <Nav>
 	<h1 class="text-4xl text-center m-4">サインアップ</h1>
 	<div class="flex flex-col items-center">
+		<input type="input" placeholder="Name" class="input input-bordered w-full max-w-sm m-2" />
 		<input type="email" placeholder="Email" class="input input-bordered w-full max-w-sm m-2" />
 		<input
 			type="password"
