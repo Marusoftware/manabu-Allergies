@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "server"
+version = "0.0.1"
+description = "Manabu Allergy API Server"
+authors = ["Maruo.S <raspi-maru2004@outlook.jp>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.82.0"
+python-multipart = "^0.0.5"
+pydantic = {extras = ["email"], version = "^1.10.2"}
+passlib = "^1.7.4"
+httpx = "^0.23.0"
+itsdangerous = "^2.1.2"
+Authlib = "^1.2.0"
+tortoise-orm = {extras = ["accel", "asyncpg"], version = "^0.19.2"}
+bcrypt = "^4.0.1"
+
+[tool.poetry.group.dev.dependencies]
+uvicorn = "^0.18.3"
+watchfiles = "^0.18.1"
+pydantic = {extras = ["dotenv"], version = "^1.10.2"}
+requests = "^2.28.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
