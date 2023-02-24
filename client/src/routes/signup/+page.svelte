@@ -3,7 +3,7 @@
 </script>
 
 <Nav>
-	<h1 class="text-4xl text-center m-4">サインイン</h1>
+	<h1 class="text-4xl text-center m-4">サインアップ</h1>
 	<div class="flex flex-col items-center">
 		<input type="email" placeholder="Email" class="input input-bordered w-full max-w-sm m-2" />
 		<input
@@ -11,7 +11,7 @@
 			placeholder="Password"
 			class="input input-bordered w-full max-w-sm m-2"
 		/>
-		<button class="btn w-96 m-2">サインイン</button>
-		<p><a class="text-blue-600 underline" href="/signup">ここ</a>でアカウント登録ができます</p>
+		<button class="btn w-96 m-2">サインアップ</button>
+		<p><a class="text-blue-600 underline" href="/signin">ここ</a>でサインインできます</p>
 	</div>
 </Nav>
