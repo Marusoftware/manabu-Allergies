@@ -23,9 +23,13 @@
 		<a href="/" class="btn btn-ghost normal-case text-xl">Manabu Allergies</a>
 	</div>
 	<div class="flex-none">
-		<button class="btn btn-ghost normal-case" on:click={() => goto('/signin')}>サインイン</button>
-		<button class="btn btn-ghost normal-case" on:click={() => goto('/signup')}>サインアップ</button>
-		<div class="dropdown dropdown-bottom dropdown-left">
+		<button class="btn btn-ghost normal-case hidden sm:block" on:click={() => goto('/signin')}
+			>サインイン</button
+		>
+		<button class="btn btn-ghost normal-case hidden sm:block" on:click={() => goto('/signup')}
+			>サインアップ</button
+		>
+		<div class="dropdown dropdown-bottom dropdown-left sm:hidden">
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 			<!-- svelte-ignore a11y-label-has-associated-control -->
 			<label tabindex="0" class="btn btn-square btn-ghost">
@@ -44,8 +48,8 @@
 			</label>
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 			<ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-				<li><a href="/">Item 1</a></li>
-				<li><a href="/">Item 2</a></li>
+				<li><a href="/signin">サインイン</a></li>
+				<li><a href="/signup">サインアップ</a></li>
 			</ul>
 		</div>
 	</div>
