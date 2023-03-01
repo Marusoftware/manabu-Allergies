@@ -64,6 +64,7 @@
 		<ul class="menu p-4 w-80 bg-base-100 text-base-content">
 			<li><a href="/ranking">ランキング</a></li>
 			<li><a href="/reference">図鑑</a></li>
+			<li><a href="/scan">スキャン</a></li>
 			<li><a href="/settings">設定</a></li>
 		</ul>
 	</div>
