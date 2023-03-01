@@ -12,6 +12,11 @@
 			placeholder="Password"
 			class="input input-bordered w-full max-w-sm m-2"
 		/>
+		<input
+			type="password"
+			placeholder="Confirm password"
+			class="input input-bordered w-full max-w-sm m-2"
+		/>
 		<button class="btn w-96 m-2">サインアップ</button>
 		<p><a class="text-blue-600 underline" href="/signin">ここ</a>でサインインできます</p>
 	</div>
