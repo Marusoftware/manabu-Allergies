@@ -1,3 +1,4 @@
+from typing import List
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from fastapi import APIRouter, Depends, HTTPException, Request
 
@@ -44,3 +45,9 @@ async def signout(request:Request, token:str =Depends(oauth)):
     if "users" in request.session:
         request.session["users"]=[user for user in request.session["users"] if user["token"]!=token]
     await TokenDB.filter(token=token).delete()
+
+@router.get("/session", response_model=List[Token])
+async def session(request:Request):
+    if not "users" in request.session:
+        return []
+    return [Token(access_token=user["token"], token_type="bearer", user_id=user["id"], expired_in=user["expired_in"]) for user in request.session["users"] if await TokenDB.exists(token=user["token"], token_type=TokenType.bearer)]
