@@ -6,8 +6,9 @@ from ..models.response.user import User, Token
 from ..models.request.auth import UserCreate
 from ..models.db.user import User as UserDB
 from ..models.db.auth import Token as TokenDB, TokenType
+from ..config import Settings
 import secrets
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from passlib.context import CryptContext
 
 from tortoise.expressions import Q
@@ -28,7 +29,7 @@ async def signin(request: Request, form_data: OAuth2PasswordRequestForm = Depend
         #    token=await TokenDB.create(token=secrets.token_hex(32), token_type=TokenType.pre, user=user, expired_in=datetime.now()+timedelta(=2))
         #    return Token(access_token=token.token, token_type=token.token_type, user_id=user.id, expired_in=token.expired_in)
         #else:
-        token=await TokenDB.create(token=secrets.token_hex(32), token_type=TokenType.bearer, user=user, expired_in=datetime.now()+timedelta(hours=2))
+        token=await TokenDB.create(token=secrets.token_hex(32), token_type=TokenType.bearer, user=user, expired_in=datetime.now(tz=timezone(offset=Settings().timedelta))+timedelta(hours=2))
         if "users" not in request.session:
             request.session["users"]=[]
         request.session["users"].append({"name":user.name, "id":str(user.id), "token":token.token, "expired_in":token.expired_in.isoformat()})
