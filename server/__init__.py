@@ -1,6 +1,7 @@
-from fastapi import APIRouter, FastAPI
+from fastapi import FastAPI
+from fastapi.routing import APIRoute
 
-def custom_generate_unique_id(route: APIRouter):
+def custom_generate_unique_id(route: APIRoute):
     return f"{f'{route.tags[0]}-'if len(route.tags) else ''}{route.name}"
 
 app = FastAPI(title="ManabuAllergies API", description="API of ManabuAllergies", generate_unique_id_function=custom_generate_unique_id)
