@@ -1,24 +1,34 @@
 <script label="ts">
 	import Nav from '../../components/Nav.svelte';
-	import { AuthApi, Configuration } from '../../openapi';
-	const config = new Configuration({
-		basePath: '/api/v1',
-		accessToken: async () => 'token' + Math.random()
-	});
-	const authApi = new AuthApi(config);
+	let name = '';
+	let email = '';
+	let password = '';
+	let confirm = '';
 </script>
 
 <Nav>
 	<h1 class="text-4xl text-center m-4">サインアップ</h1>
 	<div class="flex flex-col items-center">
-		<input type="input" placeholder="Name" class="input input-bordered w-full max-w-sm m-2" />
-		<input type="email" placeholder="Email" class="input input-bordered w-full max-w-sm m-2" />
 		<input
+			bind:value={name}
+			type="input"
+			placeholder="Name"
+			class="input input-bordered w-full max-w-sm m-2"
+		/>
+		<input
+			bind:value={email}
+			type="email"
+			placeholder="Email"
+			class="input input-bordered w-full max-w-sm m-2"
+		/>
+		<input
+			bind:value={password}
 			type="password"
 			placeholder="Password"
 			class="input input-bordered w-full max-w-sm m-2"
 		/>
 		<input
+			bind:value={confirm}
 			type="password"
 			placeholder="Confirm password"
 			class="input input-bordered w-full max-w-sm m-2"

@@ -1,12 +1,20 @@
 <script label="ts">
 	import Nav from '../../components/Nav.svelte';
+	let email = '';
+	let password = '';
 </script>
 
 <Nav>
 	<h1 class="text-4xl text-center m-4">サインイン</h1>
 	<div class="flex flex-col items-center">
-		<input type="email" placeholder="Email" class="input input-bordered w-full max-w-sm m-2" />
 		<input
+			bind:value={email}
+			type="email"
+			placeholder="Email"
+			class="input input-bordered w-full max-w-sm m-2"
+		/>
+		<input
+			bind:value={password}
 			type="password"
 			placeholder="Password"
 			class="input input-bordered w-full max-w-sm m-2"
