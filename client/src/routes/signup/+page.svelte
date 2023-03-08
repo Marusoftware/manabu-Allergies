@@ -1,5 +1,11 @@
 <script label="ts">
 	import Nav from '../../components/Nav.svelte';
+	import { AuthApi, Configuration } from '../../openapi';
+	const config = new Configuration({
+		basePath: '/api/v1',
+		accessToken: async () => 'token' + Math.random()
+	});
+	const authApi = new AuthApi(config);
 </script>
 
 <Nav>
