@@ -27,7 +27,7 @@ aerich = "^0.7.1"
 
 
 [tool.aerich]
-tortoise_orm = "server.models.db.config"
+tortoise_orm = "server.db_config"
 location = "./migrations"
 src_folder = "./."
 [build-system]

@@ -29,11 +29,30 @@ app.add_middleware(CORSMiddleware,
 from .routes import router
 app.include_router(router)
 
-from .models.db import init_db, final_db
-@app.on_event("startup")
-async def startup():
-    await init_db()
+from tortoise.contrib.fastapi import register_tortoise
+from .config import Settings
+from .models import db
 
-@app.on_event("shutdown")
-async def shutdown():
-    await final_db()
+settings=Settings()
+
+db_config={
+    "connections":{
+        "default":{
+            "engine":"tortoise.backends.asyncpg",
+            "credentials":{
+                "host":settings.postgres_host,
+                "port":settings.postgres_port,
+                "user":settings.postgres_user,
+                "password":settings.postgres_password,
+                "database":settings.postgres_db
+            }
+        }
+    },
+    "apps":{
+        "models": {
+            "models":[db, 'aerich.models'],
+            'default_connection': 'default'
+        }
+    }
+}
+register_tortoise(app=app, config=db_config, add_exception_handlers=True)
