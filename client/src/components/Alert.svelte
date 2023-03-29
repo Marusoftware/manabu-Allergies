@@ -1,10 +1,16 @@
 <script lang="ts">
+	import { createEventDispatcher } from "svelte";
+	
 	export let type: 'normal' | 'info' | 'success' | 'warning' | 'error';
 	export let message: string;
-	export let onClick: () => void;
+
+	const dispatch=createEventDispatcher()
+	async function onClick(){
+		dispatch("click")
+	}
 </script>
 
-<div class="absolute m-auto left-4 right-4">
+<div class="m-auto left-4 right-4 bottom-4">
 	{#if type == 'normal'}
 		<div class="alert shadow-lg">
 			<div>

@@ -1,18 +1,15 @@
 import { AuthApi, Configuration, type Middleware, type ResponseContext, type Token } from '../openapi';
 import { get, writable } from 'svelte/store';
+import { showNotification } from '../util';
 
 class APIExceptionHandlerMiddleware implements Middleware{
     async post(context: ResponseContext): Promise<void | Response> {
-        try {
-            if(context.response.ok){
-                return
-            }
-            const json=await context.response.json()
-            if (json.detail) {
-                alert(json.detail)
-            }
-        } catch (error) {
-            console.log(error)
+        if(context.response.ok){
+            return
+        }
+        const json=await context.response.json()
+        if(typeof json.detail === 'string') {
+            showNotification({message:json.detail, type:"error", timeout:3})
         }
     }
 }

@@ -2,10 +2,9 @@
 	import Nav from '../../components/Nav.svelte';
 	import { goto } from '$app/navigation';
 	import { signUp } from '../../store/auth';
-	import Alert from '../../components/Alert.svelte';
 	import { field, form } from 'svelte-forms';
 	import { max, required, email as _email, matchField, min } from 'svelte-forms/validators';
-	import { filterMessage } from '../../util';
+	import { filterMessage, showNotification } from '../../util';
 
 	const name = field('name', '', [required(), max(1024)]);
 	const email = field('email', '', [required(), _email(), max(1024)]);
@@ -19,19 +18,14 @@
 		if(!$signupForm.valid){
 			return
 		}
-		signUp($name.value, $name.value, $password.value)
+		await signUp($name.value, $email.value, $password.value)
 		goto('/');
 	}
+
+	
 </script>
 
 <Nav>
-	<Alert
-		type="info"
-		message="エラーが発生しました"
-		onClick={() => {
-			console.log('aaa');
-		}}
-	/>
 	<h1 class="text-4xl text-center m-4">サインアップ</h1>
 	<form class="flex flex-col items-center" on:submit={submitSignup}>
 		<input
