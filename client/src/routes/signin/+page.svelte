@@ -1,43 +1,41 @@
-<script label="ts">
-	import Nav from '../../components/Nav.svelte';
-	import { goto } from '$app/navigation';
+<script lang="ts">
+	import { form, field } from 'svelte-forms';
+	import { max, required, email as _email } from 'svelte-forms/validators';
 	import { signIn } from '../../store/auth';
-	let isChecking = false;
-	let email = '';
-	let password = '';
-	const handleClick = async () => {
-		isChecking = true;
-		try {
-			await signIn(email, password);
-			goto('/');
-		} catch (error) {
-			// @ts-ignore
-			alert('おっと、サーバー側で何らかのエラーが発生しました。\n' + error.message);
+	import Nav from '../../components/Nav.svelte';
+
+	const email = field('email', '', [required(), _email(), max(1024)]);
+	const password = field('password', '', [required(), max(1024)]);
+	const loginForm = form(email, password);
+
+	async function submitSignin(e:Event){
+		e.preventDefault()
+		await loginForm.validate()
+		if(!$loginForm.valid){
+			return
 		}
-		isChecking = false;
-	};
+		await signIn($email.value, $password.value)
+	}
 </script>
 
 <Nav>
 	<h1 class="text-4xl text-center m-4">サインイン</h1>
-	<div class="flex flex-col items-center">
+	<form class="flex flex-col items-center" on:submit={submitSignin}>
 		<input
-			bind:value={email}
+			id="email"
+			bind:value={$email.value}
 			type="email"
 			placeholder="Email"
-			class="input input-bordered w-full max-w-sm m-2"
+			class="input input-bordered w-full max-w-sm m-2 {$email.valid ?"":"input-error"}"
 		/>
 		<input
-			bind:value={password}
+			bind:value={$password.value}
 			type="password"
 			placeholder="Password"
-			class="input input-bordered w-full max-w-sm m-2"
+			class="input input-bordered w-full max-w-sm m-2 {$password.valid ?"":"input-error"}"
 		/>
-		{#if isChecking}
-			<button class="btn btn-square loading w-96 m-2" />
-		{:else}
-			<button on:click={handleClick} class="btn w-96 m-2">サインイン</button>
-		{/if}
+		
+		<button type="submit" class="btn w-96 m-2">サインイン</button>
 		<p><a class="text-blue-600 underline" href="/signup">ここ</a>でアカウント登録ができます</p>
-	</div>
+	</form>
 </Nav>

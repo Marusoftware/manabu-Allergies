@@ -1,4 +1,4 @@
-<script label="ts">
+<script lang="ts">
 	import Nav from '../../components/Nav.svelte';
 	import { goto } from '$app/navigation';
 	import { signUp } from '../../store/auth';
