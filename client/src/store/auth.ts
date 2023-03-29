@@ -4,6 +4,9 @@ import { get, writable } from 'svelte/store';
 class APIExceptionHandlerMiddleware implements Middleware{
     async post(context: ResponseContext): Promise<void | Response> {
         try {
+            if(context.response.ok){
+                return
+            }
             const json=await context.response.json()
             if (json.detail) {
                 alert(json.detail)

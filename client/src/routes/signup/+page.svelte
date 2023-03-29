@@ -3,26 +3,25 @@
 	import { goto } from '$app/navigation';
 	import { signUp } from '../../store/auth';
 	import Alert from '../../components/Alert.svelte';
-	let isChecking = false;
-	let isChecked = false;
-	let name = '';
-	let email = '';
-	let password = '';
-	let confirm = '';
-	const handleClick = async () => {
-		isChecking = true;
-		isChecked = true;
-		if (name != '' && email != '' && password.length > 5 && password == confirm) {
-			try {
-				await signUp(name, email, password);
-				goto('/');
-			} catch (error) {
-				// @ts-ignore
-				alert('おっと、サーバー側で何らかのエラーが発生しました。\n' + error.message);
-			}
+	import { field, form } from 'svelte-forms';
+	import { max, required, email as _email, matchField, min } from 'svelte-forms/validators';
+	import { filterMessage } from '../../util';
+
+	const name = field('name', '', [required(), max(1024)]);
+	const email = field('email', '', [required(), _email(), max(1024)]);
+	const password = field('password', '', [required(), min(6), max(1024)]);
+	const confirm = field('confirm', '', [required(), matchField(password)]);
+	const signupForm = form(name, email, password, confirm)
+	
+	async function submitSignup(e:Event) {
+		e.preventDefault()
+		await signupForm.validate()
+		if(!$signupForm.valid){
+			return
 		}
-		isChecking = false;
-	};
+		signUp($name.value, $name.value, $password.value)
+		goto('/');
+	}
 </script>
 
 <Nav>
@@ -34,52 +33,36 @@
 		}}
 	/>
 	<h1 class="text-4xl text-center m-4">サインアップ</h1>
-	<div class="flex flex-col items-center">
+	<form class="flex flex-col items-center" on:submit={submitSignup}>
 		<input
-			bind:value={name}
+			bind:value={$name.value}
 			type="input"
 			placeholder="Name"
-			class="input input-bordered w-full max-w-sm m-2"
+			class="input input-bordered w-full max-w-sm m-2 {$name.valid ?"":"input-error"}"
 		/>
-		{#if name == '' && isChecked}
-			<div class="text-red-600 w-full max-w-sm">このフィールドは必須です。</div>
-		{/if}
+		<div class="text-red-600 w-full max-w-sm">{$name.errors.map(filterMessage).join(", ")}</div>
 		<input
-			bind:value={email}
+			bind:value={$email.value}
 			type="email"
 			placeholder="Email"
-			class="input input-bordered w-full max-w-sm m-2"
+			class="input input-bordered w-full max-w-sm m-2 {$email.valid ?"":"input-error"}"
 		/>
-		{#if email == '' && isChecked}
-			<div class="text-red-600 w-full max-w-sm">このフィールドは必須です。</div>
-		{/if}
+		<div class="text-red-600 w-full max-w-sm">{$email.errors.map(filterMessage).join(", ")}</div>
 		<input
-			bind:value={password}
+			bind:value={$password.value}
 			type="password"
 			placeholder="Password"
-			class="input input-bordered w-full max-w-sm m-2"
+			class="input input-bordered w-full max-w-sm m-2 {$password.valid ?"":"input-error"}"
 		/>
-		{#if password == '' && isChecked}
-			<div class="text-red-600 w-full max-w-sm">このフィールドは必須です。</div>
-		{:else if password.length < 6 && isChecked}
-			<div class="text-red-600 w-full max-w-sm">6文字以上入力してください。</div>
-		{/if}
+		<div class="text-red-600 w-full max-w-sm">{$password.errors.map(filterMessage).join(", ")}</div>
 		<input
-			bind:value={confirm}
+			bind:value={$confirm.value}
 			type="password"
 			placeholder="Confirm password"
-			class="input input-bordered w-full max-w-sm m-2"
+			class="input input-bordered w-full max-w-sm m-2 {$confirm.valid ?"":"input-error"}"
 		/>
-		{#if confirm == '' && isChecked}
-			<div class="text-red-600 w-full max-w-sm">このフィールドは必須です。</div>
-		{:else if password != confirm && isChecked}
-			<div class="text-red-600 w-full max-w-sm">パスワードと一致しません。</div>
-		{/if}
-		{#if isChecking}
-			<button class="btn btn-square loading w-96 m-2" />
-		{:else}
-			<button on:click={handleClick} class="btn w-96 m-2">サインアップ</button>
-		{/if}
+		<div class="text-red-600 w-full max-w-sm">{$confirm.errors.map(filterMessage).join(", ")}</div>
+		<button type="submit" class="btn w-96 m-2">サインアップ</button>
 		<p><a class="text-blue-600 underline" href="/signin">ここ</a>でサインインできます</p>
-	</div>
+	</form>
 </Nav>

@@ -4,6 +4,7 @@
 	import { signIn } from '../../store/auth';
 	import Nav from '../../components/Nav.svelte';
 	import { filterMessage } from '../../util';
+	import { goto } from '$app/navigation';
 
 	const email = field('email', '', [required(), _email(), max(1024)]);
 	const password = field('password', '', [required(), max(1024)]);
@@ -16,6 +17,7 @@
 			return
 		}
 		await signIn($email.value, $password.value)
+		goto('/');
 	}
 </script>
 
