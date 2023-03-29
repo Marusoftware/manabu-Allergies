@@ -1,9 +1,24 @@
-import { AuthApi, Configuration, type Token } from '../openapi';
+import { AuthApi, Configuration, type Middleware, type ResponseContext, type Token } from '../openapi';
 import { get, writable } from 'svelte/store';
-const accessToken=writable<Token>(undefined);
+
+class APIExceptionHandlerMiddleware implements Middleware{
+    async post(context: ResponseContext): Promise<void | Response> {
+        try {
+            const json=await context.response.json()
+            if (json.detail) {
+                alert(json.detail)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
+
+const accessToken=writable<Token|null>(null);
 const config = new Configuration({
     basePath: '/api/v1',
-    accessToken: async () => "Bearer "+get(accessToken).accessToken
+    accessToken: async () => "Bearer "+get(accessToken)?.accessToken,
+    middleware: [new APIExceptionHandlerMiddleware]
 });
 const authApi = new AuthApi(config);
 export const signUp = async (name: string, email: string, password: string) => {
@@ -26,4 +41,5 @@ export const signIn = async (username: string, password: string) => {
 }
 export const signOut = async () => {
     await authApi.authSignout()
+    accessToken.set(null)
 }
