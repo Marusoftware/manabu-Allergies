@@ -2,6 +2,7 @@
 	import Nav from '../../components/Nav.svelte';
 	import { goto } from '$app/navigation';
 	import { signUp } from '../../store/auth';
+	import Alert from '../../components/Alert.svelte';
 	let isChecking = false;
 	let isChecked = false;
 	let name = '';
@@ -25,6 +26,13 @@
 </script>
 
 <Nav>
+	<Alert
+		type="info"
+		message="エラーが発生しました"
+		onClick={() => {
+			console.log('aaa');
+		}}
+	/>
 	<h1 class="text-4xl text-center m-4">サインアップ</h1>
 	<div class="flex flex-col items-center">
 		<input
