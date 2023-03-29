@@ -1,4 +1,4 @@
-<script label="ts">
+<script lang="ts">
 	// @ts-nocheck
 
 	import Nav from '../../components/Nav.svelte';

@@ -1,4 +1,4 @@
-<script label="ts">
+<script lang="ts">
 	import Nav from '../../components/Nav.svelte';
 	const items = [
 		{ title: '卵', content: 'アレルギーアレルギーアレルギー' },
