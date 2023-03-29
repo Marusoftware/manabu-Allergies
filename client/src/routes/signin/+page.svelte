@@ -3,6 +3,7 @@
 	import { max, required, email as _email } from 'svelte-forms/validators';
 	import { signIn } from '../../store/auth';
 	import Nav from '../../components/Nav.svelte';
+	import { filterMessage } from '../../util';
 
 	const email = field('email', '', [required(), _email(), max(1024)]);
 	const password = field('password', '', [required(), max(1024)]);
@@ -28,13 +29,14 @@
 			placeholder="Email"
 			class="input input-bordered w-full max-w-sm m-2 {$email.valid ?"":"input-error"}"
 		/>
+		<div class="text-red-600 w-full max-w-sm">{$email.errors.map(filterMessage).join(", ")}</div>
 		<input
 			bind:value={$password.value}
 			type="password"
 			placeholder="Password"
 			class="input input-bordered w-full max-w-sm m-2 {$password.valid ?"":"input-error"}"
 		/>
-		
+		<div class="text-red-600 w-full max-w-sm">{$password.errors.map(filterMessage).join(", ")}</div>
 		<button type="submit" class="btn w-96 m-2">サインイン</button>
 		<p><a class="text-blue-600 underline" href="/signup">ここ</a>でアカウント登録ができます</p>
 	</form>
