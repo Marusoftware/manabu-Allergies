@@ -33,7 +33,7 @@ async def signin(request: Request, form_data: OAuth2PasswordRequestForm = Depend
 
 @router.post("/signup", response_model=User)
 async def signup(user:UserCreate):
-    if await UserDB.exists(name=user.name) or await UserDB.exists(email=user.email):
+    if await UserDB.exists(email=user.email):
         raise HTTPException(status_code=400, detail="Password or Username is wrong.")
     return await UserDB.create(name=user.name, email=user.email, password=crypt.hash(user.password.get_secret_value()))
 
