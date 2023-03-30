@@ -10,6 +10,8 @@ class APIExceptionHandlerMiddleware implements Middleware{
         const json=await context.response.json()
         if(typeof json.detail === 'string') {
             showNotification({message:json.detail, type:"error", timeout:3})
+        } else {
+            showNotification({message:"何らかの問題が発生しました", type:"error", timeout:3})
         }
     }
 }

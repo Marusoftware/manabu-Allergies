@@ -19,10 +19,9 @@
 			return
 		}
 		await signUp($name.value, $email.value, $password.value)
-		goto('/');
+		showNotification({message:"サインアップに成功しました。サインインしてください。", type:"info", timeout:3})
+		goto('/signin');
 	}
-
-	
 </script>
 
 <Nav>

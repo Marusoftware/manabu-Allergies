@@ -3,7 +3,7 @@
 	import { max, required, email as _email, min } from 'svelte-forms/validators';
 	import { signIn } from '../../store/auth';
 	import Nav from '../../components/Nav.svelte';
-	import { filterMessage } from '../../util';
+	import { filterMessage, showNotification } from '../../util';
 	import { goto } from '$app/navigation';
 
 	const email = field('email', '', [required(), _email(), max(1024)]);
@@ -17,6 +17,7 @@
 			return
 		}
 		await signIn($email.value, $password.value)
+		showNotification({message:"サインインに成功しました。", type:"info", timeout:3})
 		goto('/');
 	}
 </script>
