@@ -16,7 +16,7 @@ class APIExceptionHandlerMiddleware implements Middleware{
     }
 }
 
-const accessToken=writable<Token|null>(null);
+export const accessToken=writable<Token|null>(null);
 const config = new Configuration({
     basePath: '/api/v1',
     accessToken: async () => "Bearer "+get(accessToken)?.accessToken,

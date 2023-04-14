@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { accessToken } from '../store/auth';
 </script>
 
 <div class="navbar bg-base-100">
@@ -23,12 +24,18 @@
 		<a href="/" class="btn btn-ghost normal-case text-xl">Manabu Allergies</a>
 	</div>
 	<div class="flex-none">
-		<button class="btn btn-ghost normal-case hidden sm:block" on:click={() => goto('/signin')}
-			>サインイン</button
-		>
-		<button class="btn btn-ghost normal-case hidden sm:block" on:click={() => goto('/signup')}
-			>サインアップ</button
-		>
+		{#if $accessToken===null}
+			<button class="btn btn-ghost normal-case hidden sm:block" on:click={() => goto('/signin')}
+				>サインイン</button
+			>
+			<button class="btn btn-ghost normal-case hidden sm:block" on:click={() => goto('/signup')}
+				>サインアップ</button
+			>
+		{:else}
+			<button class="btn btn-ghost normal-case hidden sm:block" on:click={() => accessToken.set(null)}
+				>サインアウト</button
+			>
+		{/if}
 		<div class="dropdown dropdown-bottom dropdown-left sm:hidden">
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 			<!-- svelte-ignore a11y-label-has-associated-control -->
