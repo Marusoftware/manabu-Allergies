@@ -17,6 +17,10 @@ router=APIRouter(tags=["Auth"])
 oauth=OAuth2PasswordBearer(tokenUrl="/api/v1/auth/signin")
 crypt=CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+async def get_user(token: oauth=Depends()):
+    token:Token=await Token.get(token=token).prefetch_related("user")
+    return token.user
+
 @router.post("/signin", response_model=Token)
 async def signin(request: Request, form_data: OAuth2PasswordRequestForm = Depends()):
     user=await UserDB.get_or_none(email=form_data.username)
