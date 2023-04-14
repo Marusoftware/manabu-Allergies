@@ -1,4 +1,5 @@
 apis/AuthApi.ts
+apis/UserApi.ts
 apis/index.ts
 index.ts
 models/HTTPValidationError.ts
@@ -7,6 +8,7 @@ models/Token.ts
 models/TokenType.ts
 models/User.ts
 models/UserCreate.ts
+models/UserUpdate.ts
 models/ValidationError.ts
 models/index.ts
 runtime.ts
