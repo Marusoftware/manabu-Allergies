@@ -1,6 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import { accessToken } from '../store/auth';
+	import { accessToken, signOut } from '../store/auth';
+
+	async function signout(){
+		await signOut()
+		accessToken.set(null)
+	}
 </script>
 
 <div class="navbar bg-base-100">
@@ -32,7 +37,7 @@
 				>サインアップ</button
 			>
 		{:else}
-			<button class="btn btn-ghost normal-case hidden sm:block" on:click={() => accessToken.set(null)}
+			<button class="btn btn-ghost normal-case hidden sm:block" on:click={signout}
 				>サインアウト</button
 			>
 		{/if}
