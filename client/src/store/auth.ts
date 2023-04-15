@@ -1,4 +1,4 @@
-import { AuthApi, Configuration, type Middleware, type ResponseContext, type Token } from '../openapi';
+import { AuthApi, Configuration, UserApi, type Middleware, type ResponseContext, type Token } from '../openapi';
 import { get, writable } from 'svelte/store';
 import { showNotification } from '../util';
 
@@ -22,7 +22,8 @@ const config = new Configuration({
     accessToken: async () => "Bearer "+get(accessToken)?.accessToken,
     middleware: [new APIExceptionHandlerMiddleware]
 });
-const authApi = new AuthApi(config);
+export const authApi = new AuthApi(config);
+export const userApi = new UserApi(config);
 export const signUp = async (name: string, email: string, password: string) => {
     const res = await authApi.authSignup({
         userCreate: {
