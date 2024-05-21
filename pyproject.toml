@@ -10,7 +10,7 @@ readme = "README.md"
 python = "^3.8"
 fastapi = "^0.109.1"
 python-multipart = "^0.0.7"
-pydantic = {extras = ["email"], version = "^1.10.2"}
+pydantic = {extras = ["email"], version = "^1.10.13"}
 passlib = "^1.7.4"
 httpx = "^0.23.0"
 itsdangerous = "^2.1.2"
@@ -21,7 +21,7 @@ bcrypt = "^4.0.1"
 [tool.poetry.group.dev.dependencies]
 uvicorn = "^0.18.3"
 watchfiles = "^0.18.1"
-pydantic = {extras = ["dotenv"], version = "^1.10.2"}
+pydantic = {extras = ["dotenv"], version = "^1.10.13"}
 requests = "^2.32.0"
 aerich = "^0.7.1"
 
