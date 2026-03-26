@@ -1151,9 +1151,9 @@ detective@^5.2.1:
     minimist "^1.2.6"
 
 devalue@^5.6.3:
-  version "5.6.3"
-  resolved "https://registry.yarnpkg.com/devalue/-/devalue-5.6.3.tgz#fee7b50bf072f4a4cdf18d1f27de3ce92131f699"
-  integrity sha512-nc7XjUU/2Lb+SvEFVGcWLiKkzfw8+qHI7zn8WYXKkLMgfGSHbgCEaR6bJpev8Cm6Rmrb19Gfd/tZvGqx9is3wg==
+  version "5.6.4"
+  resolved "https://registry.yarnpkg.com/devalue/-/devalue-5.6.4.tgz#aec6cdba0e4109543b40c94d46e2b87bf8af8de5"
+  integrity sha512-Gp6rDldRsFh/7XuouDbxMH3Mx8GMCcgzIb1pDTvNyn8pZGQ22u+Wa+lGV9dQCltFQ7uVw0MhRyb8XDskNFOReA==
 
 didyoumean@^1.2.2:
   version "1.2.2"
@@ -2875,10 +2875,10 @@ uuid@8.3.2:
   optionalDependencies:
     fsevents "~2.3.2"
 
-vite@^7.2.2:
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-7.2.2.tgz#17dd62eac2d0ca0fa90131c5f56e4fefb8845362"
-  integrity sha512-BxAKBWmIbrDgrokdGZH1IgkIk/5mMHDreLDmCJ0qpyJaAteP8NvMhkwr/ZCQNqNH97bw/dANTE9PDzqwJghfMQ==
+vite@^7.2.3:
+  version "7.2.3"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-7.2.3.tgz#54f14f5f4bdd71d07817b25ac3b5b79ffd200f7f"
+  integrity sha512-rdA2LHQCBvDqLpVHd49/oor6rogVEQiQq2yw86Yhk8A8Y4x49HYiHel7ayXBRVpu1x23ltWp+ORS++M6Ct0sXA==
   dependencies:
     esbuild "^0.25.0"
     fdir "^6.5.0"
